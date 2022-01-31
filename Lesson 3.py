@@ -114,11 +114,11 @@
 # 6. Реализовать функцию int_func(), принимающую слова из маленьких латинских букв и возвращающую их же,
 # но с прописной первой буквой. Например, print(int_func(‘text’)) -> Text.
 
-x = input('Введите слово: ')
-def int_func():
+
+def int_func(x):
     return x.title()
 
-#print(int_func())
+#print(int_func(x= input('Введите слово: ')))
 
 
 
@@ -129,4 +129,13 @@ def int_func():
 # Используйте написанную ранее функцию int_func().
 
 def mu_func4(*args):
-    stroka = input()
+    tmp = []
+    result = ' '
+    stroka = input('Введите строку: ').split( )
+    for el in stroka:
+        tmp.append(int_func(el))
+        result = " ".join(tmp)
+    return result
+
+print(mu_func4())
+
