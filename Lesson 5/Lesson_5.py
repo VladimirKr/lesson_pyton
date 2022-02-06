@@ -2,7 +2,37 @@
 # вводимые пользователем. Об окончании ввода данных будет свидетельствовать пустая строка.
 
 
+# tmp = input("Введите данные: ")
+# if len(tmp):
+#     with open('text_1.txt', 'w', encoding='UTF-8') as f_obj:
+#         f_obj.write(f'{tmp}')
+#         while len(tmp):
+#             tmp = input(f"Введите данные: ")
+#             if len(tmp):
+#                 f_obj.write(f'\n{tmp}')
+#
+# print(f'Файл закрыт: {f_obj.closed}')
+
+
 # 2. Создать текстовый файл (не программно), сохранить в нём несколько строк, выполнить подсчёт строк и слов в каждой строке.
+
+# with open('text_2.txt', 'r', encoding='UTF-8') as f_obj:
+#     tmp = f_obj.read()
+# i = 0
+# el = 0
+# n = 0
+# print(tmp)
+# print('')
+#
+# sum_strok = len(tmp.split('\n'))
+# sum_slow = tmp.count(' ') + sum_strok
+# for i in tmp.split('\n'):
+#     n += 1
+#     el = len(i.split(' '))
+#     print(f'В {n}-й строке: {el} слов(a)')
+# print('')
+# print(f'Сумма строк в файле: {sum_strok}')
+# print(f'Сумма слов в файле: {sum_slow}')
 
 
 # 3. Создать текстовый файл (не программно). Построчно записать фамилии сотрудников и
@@ -13,6 +43,18 @@
 # Иванов 23543.12
 # Петров 13749.32
 
+# with open('text_3.txt', 'r', encoding='UTF-8') as f_obj:
+#     tpm = f_obj
+#     sal = []
+#     empl = []
+#     n = []
+#     my_list = tpm.read().split('\n')
+#     for el in my_list:
+#         i = el.split(' ')
+#         if float(i[1]) < 20000.0:
+#             empl.append(i[0])
+#             sal.append(i[1])
+# print(f'У сотрудников {empl}, оклад меньше 20000. Средний оклад этих сотрудников {(sum(map(int, sal)) / len(sal)):.2f}')
 
 
 # 4. Создать (не программно) текстовый файл со следующим содержимым:
@@ -25,9 +67,26 @@
 # Новый блок строк должен записываться в новый текстовый файл.
 
 
+# rus = {'One' : 'Один', 'Two' : 'Два', 'Three' : 'Три', 'Four' : 'Четыре'}
+# new_file = []
+# with open('text_4.txt', 'r', encoding='UTF-8') as f_obj:
+#     for i in f_obj:
+#         i = i.split(' ', 1)
+#         new_file.append(rus[i[0]] + ' ' + i[1])
+#     print(new_file)
+#
+# with open('text_4_new.txt', 'w', encoding='UTF-8') as f_obj_2:
+#     f_obj_2.writelines(new_file)
+
 # 5. Создать (программно) текстовый файл, записать в него программно набор чисел, разделённых пробелами.
 # Программа должна подсчитывать сумму чисел в файле и выводить её на экран.
 
+# with open('text_5.txt', 'w+', encoding='UTF-8') as f_obj:
+#     line = input('Введите цифры через пробел \n')
+#     f_obj.writelines(line)
+#     num = line.split(' ')
+#
+#     print(sum(map(int, num)))
 
 # 6. Сформировать (не программно) текстовый файл. В нём каждая строка должна описывать учебный
 # предмет и наличие лекционных, практических и лабораторных занятий по предмету.
@@ -38,6 +97,15 @@
 # Физика: 30(л) — 10(лаб)
 # Физкультура: — 30(пр) —
 # Пример словаря: {“Информатика”: 170, “Физика”: 40, “Физкультура”: 30}
+
+#
+# subj = {}
+#
+# with open('text_6.txt', 'r', encoding='UTF-8') as f_obj:
+#     for line in f_obj:
+#         subject = line.split(' ')[0]; lecture = (line.split(' ')[1]).split('('); practice = (line.split(' ')[2]).split('('); lab = (line.split(' ')[3]).split('(')
+#         subj[subject] = int(lecture[0]) + int(practice[0]) + int(lab[0])
+# print(f'Общее количество часов по предметам - \n {subj}')
 
 
 # 7. Создать вручную и заполнить несколькими строками текстовый файл, в котором каждая строка будет
@@ -54,3 +122,34 @@
 # Пример json-объекта:
 # [{"firm_1": 5000, "firm_2": 3000, "firm_3": 1000}, {"average_profit": 2000}]
 # Подсказка: использовать менеджер контекста.
+
+
+
+# import json
+# profit = {}
+# pr = {}
+# prof = 0
+# prof_aver = 0
+# i = 0
+# with open('text_7.txt', 'r', encoding='UTF-8') as f_obj:
+#     for line in f_obj:
+#         name, firm, earning, damage = line.split(' ')
+#         profit[name] = int(earning) - int(damage)
+#         if profit.setdefault(name) >= 0:
+#             prof = prof + profit.setdefault(name)
+#             i += 1
+#     if i != 0:
+#         prof_aver = prof / i
+#         print(f'Прибыль средняя - {prof_aver:.2f}')
+#     else:
+#         print(f'Прибыль средняя - отсутсвует. Все работают в убыток')
+#     pr = {'средняя прибыль': round(prof_aver)}
+#     profit.update(pr)
+#     print(f'Прибыль каждой компании - {profit}')
+#
+# with open('text_7.json', 'w', encoding='UTF-8') as write_js:
+#     json.dump(profit, write_js)
+#
+#     js_str = json.dumps(profit)
+#     print(f'Создан файл с расширением json со следующим содержимым: \n '
+#           f' {js_str}')
